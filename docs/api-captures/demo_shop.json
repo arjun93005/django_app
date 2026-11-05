@@ -1,0 +1,143 @@
+[
+  {
+    "request_id": "17340.4",
+    "method": "GET",
+    "url": "http://127.0.0.1:5050/api/v2/bootstrap",
+    "resource_type": "Fetch",
+    "request_headers": {
+      "referer": "http://127.0.0.1:5050/",
+      "user-agent": "PriceLensBot/1.0 (+https://github.com/arjun93005/django_app)",
+      "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-US,en;q=0.9",
+      "connection": "keep-alive",
+      "host": "127.0.0.1:5050",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "request_body": null,
+    "status": 200,
+    "response_headers": {
+      "cache-control": "no-store",
+      "connection": "close",
+      "content-length": "190",
+      "content-type": "application/json",
+      "date": "Thu, 05 Nov 2026 19:06:26 GMT",
+      "server": "Werkzeug/3.1.9 Python/3.12.10"
+    },
+    "mime_type": "application/json",
+    "body": "{\"c\":\"(function(){var _a=0x17e1,_b=[0x9d,0xf3,0x64,0x9c],_c=0;for(var _i=0;_i<_b.length;_i++){_c=((_c*41+_b[_i])^_a)%1000003}return _c+((_a>>3)&0xff)})()\",\"n\":\"1793905706.732f1327fb72b85f\"}\n"
+  },
+  {
+    "request_id": "17340.6",
+    "method": "POST",
+    "url": "http://127.0.0.1:5050/api/v2/bootstrap",
+    "resource_type": "Fetch",
+    "request_headers": {
+      "content-type": "application/json",
+      "referer": "http://127.0.0.1:5050/",
+      "user-agent": "PriceLensBot/1.0 (+https://github.com/arjun93005/django_app)",
+      "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept": "*/*",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-US,en;q=0.9",
+      "connection": "keep-alive",
+      "content-length": "46",
+      "host": "127.0.0.1:5050",
+      "origin": "http://127.0.0.1:5050",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "request_body": "{\"n\":\"1793905706.732f1327fb72b85f\",\"a\":642339}",
+    "status": 200,
+    "response_headers": {
+      "cache-control": "no-store",
+      "connection": "close",
+      "content-length": "19",
+      "content-type": "application/json",
+      "date": "Thu, 05 Nov 2026 19:06:26 GMT",
+      "server": "Werkzeug/3.1.9 Python/3.12.10"
+    },
+    "mime_type": "application/json",
+    "body": "{\"ok\":1,\"ttl\":600}\n"
+  },
+  {
+    "request_id": "17340.7",
+    "method": "GET",
+    "url": "http://127.0.0.1:5050/api/v2/catalog?limit=24",
+    "resource_type": "Fetch",
+    "request_headers": {
+      "accept": "application/json",
+      "referer": "http://127.0.0.1:5050/",
+      "user-agent": "PriceLensBot/1.0 (+https://github.com/arjun93005/django_app)",
+      "x-ds-s": "01cb8c6ff0fdbb9129ae38d4aef29c51a9e5c532180bd7055815bccc7566241c",
+      "x-ds-t": "1793905586996",
+      "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-US,en;q=0.9",
+      "connection": "keep-alive",
+      "cookie": "<redacted>",
+      "host": "127.0.0.1:5050",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "request_body": null,
+    "status": 200,
+    "response_headers": {
+      "cache-control": "no-store",
+      "connection": "close",
+      "content-length": "9522",
+      "content-type": "application/json",
+      "date": "Thu, 05 Nov 2026 19:06:27 GMT",
+      "server": "Werkzeug/3.1.9 Python/3.12.10"
+    },
+    "mime_type": "application/json",
+    "body": "{\"data\":[{\"att\":{\"color\":\"silver\",\"warranty_years\":1,\"weight_g\":1905},\"brd\":\"Quanta\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Quanta Convertible 2-in-1 Edge 4 pairs a factory-calibrated display with recycled packaging and a companion app with firmware updates.\",\"id\":1,\"img\":\"/img/DS-00001.svg\",\"prc\":162599,\"rtg\":5,\"sku\":\"DS-00001\",\"stk\":59,\"ttl\":\"Quanta Convertible 2-in-1 Edge 4\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":2,\"weight_g\":645},\"brd\":\"Halcyon\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Kids Watch Max 7 pairs recycled packaging with a companion app with firmware updates and low-latency Bluetooth 5.3.\",\"id\":2,\"img\":\"/img/DS-00002.svg\",\"prc\":66699,\"rtg\":4,\"sku\":\"DS-00002\",\"stk\":31,\"ttl\":\"Halcyon Kids Watch Max 7\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":260},\"brd\":\"Lumio\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Lumio Action Camera X 9 pairs a companion app with firmware updates with low-latency Bluetooth 5.3 and a two-year warranty.\",\"id\":3,\"img\":\"/img/DS-00003.svg\",\"prc\":237199,\"rtg\":5,\"sku\":\"DS-00003\",\"stk\":56,\"ttl\":\"Lumio Action Camera X 9\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1645},\"brd\":\"Halcyon\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Mechanical Keyboard Pro 5 pairs a two-year warranty with a machined aluminium chassis and low-latency Bluetooth 5.3.\",\"id\":4,\"img\":\"/img/DS-00004.svg\",\"prc\":8299,\"rtg\":5,\"sku\":\"DS-00004\",\"stk\":59,\"ttl\":\"Halcyon Mechanical Keyboard Pro 5\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":3,\"weight_g\":985},\"brd\":\"Quanta\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Quanta Portable Monitor 15 Ultra 5 pairs multi-device pairing with all-day battery life and low-latency Bluetooth 5.3.\",\"id\":5,\"img\":\"/img/DS-00005.svg\",\"prc\":56599,\"rtg\":4,\"sku\":\"DS-00005\",\"stk\":0,\"ttl\":\"Quanta Portable Monitor 15 Ultra 5\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":3,\"weight_g\":1845},\"brd\":\"Auralis\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Auralis Sport Earbuds Edge 9 pairs all-day battery life with multi-device pairing and IP54 splash resistance.\",\"id\":6,\"img\":\"/img/DS-00006.svg\",\"prc\":32599,\"rtg\":5,\"sku\":\"DS-00006\",\"stk\":59,\"ttl\":\"Auralis Sport Earbuds Edge 9\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":3,\"weight_g\":2290},\"brd\":\"Zephyr\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Convertible 2-in-1 Plus 3 pairs USB-C fast charging with all-day battery life and a companion app with firmware updates.\",\"id\":7,\"img\":\"/img/DS-00007.svg\",\"prc\":179399,\"rtg\":3,\"sku\":\"DS-00007\",\"stk\":57,\"ttl\":\"Zephyr Convertible 2-in-1 Plus 3\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":3,\"weight_g\":325},\"brd\":\"Vantage\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Vantage Fitness Watch S 4 pairs recycled packaging with a factory-calibrated display and all-day battery life.\",\"id\":8,\"img\":\"/img/DS-00008.svg\",\"prc\":58099,\"rtg\":5,\"sku\":\"DS-00008\",\"stk\":25,\"ttl\":\"Vantage Fitness Watch S 4\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":2045},\"brd\":\"Pinecrest\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Instant Camera Ultra 3 pairs a two-year warranty with a factory-calibrated display and low-latency Bluetooth 5.3.\",\"id\":9,\"img\":\"/img/DS-00009.svg\",\"prc\":87299,\"rtg\":4,\"sku\":\"DS-00009\",\"stk\":30,\"ttl\":\"Pinecrest Instant Camera Ultra 3\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":850},\"brd\":\"Halcyon\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Ergonomic Split Keyboard Air 5 pairs a factory-calibrated display with recycled packaging and a two-year warranty.\",\"id\":10,\"img\":\"/img/DS-00010.svg\",\"prc\":23399,\"rtg\":5,\"sku\":\"DS-00010\",\"stk\":57,\"ttl\":\"Halcyon Ergonomic Split Keyboard Air 5\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"white\",\"warranty_years\":2,\"weight_g\":2100},\"brd\":\"Pinecrest\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Portable Monitor 15 Pro 2 pairs multi-device pairing with a two-year warranty and recycled packaging.\",\"id\":11,\"img\":\"/img/DS-00011.svg\",\"prc\":74899,\"rtg\":5,\"sku\":\"DS-00011\",\"stk\":7,\"ttl\":\"Pinecrest Portable Monitor 15 Pro 2\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":3,\"weight_g\":2395},\"brd\":\"Lumio\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Lumio Studio Headphones Neo 8 pairs recycled packaging with USB-C fast charging and low-latency Bluetooth 5.3.\",\"id\":12,\"img\":\"/img/DS-00012.svg\",\"prc\":17299,\"rtg\":5,\"sku\":\"DS-00012\",\"stk\":14,\"ttl\":\"Lumio Studio Headphones Neo 8\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1975},\"brd\":\"Auralis\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Auralis Convertible 2-in-1 Max 6 pairs IP54 splash resistance with multi-device pairing and recycled packaging.\",\"id\":13,\"img\":\"/img/DS-00013.svg\",\"prc\":137199,\"rtg\":5,\"sku\":\"DS-00013\",\"stk\":0,\"ttl\":\"Auralis Convertible 2-in-1 Max 6\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"white\",\"warranty_years\":3,\"weight_g\":565},\"brd\":\"Pinecrest\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Fitness Watch Lite 6 pairs all-day battery life with IP54 splash resistance and a two-year warranty.\",\"id\":14,\"img\":\"/img/DS-00014.svg\",\"prc\":40799,\"rtg\":4,\"sku\":\"DS-00014\",\"stk\":51,\"ttl\":\"Pinecrest Fitness Watch Lite 6\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":2,\"weight_g\":2540},\"brd\":\"Kestrel\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Kestrel Mirrorless Camera S 9 pairs low-latency Bluetooth 5.3 with all-day battery life and USB-C fast charging.\",\"id\":15,\"img\":\"/img/DS-00015.svg\",\"prc\":74199,\"rtg\":3,\"sku\":\"DS-00015\",\"stk\":60,\"ttl\":\"Kestrel Mirrorless Camera S 9\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":2115},\"brd\":\"Auralis\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Auralis Low-Profile Keyboard Lite 4 pairs a two-year warranty with a companion app with firmware updates and all-day battery life.\",\"id\":16,\"img\":\"/img/DS-00016.svg\",\"prc\":22899,\"rtg\":4,\"sku\":\"DS-00016\",\"stk\":27,\"ttl\":\"Auralis Low-Profile Keyboard Lite 4\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"white\",\"warranty_years\":1,\"weight_g\":1030},\"brd\":\"Vantage\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Vantage Portable Monitor 15 Pro 8 pairs a factory-calibrated display with a machined aluminium chassis and USB-C fast charging.\",\"id\":17,\"img\":\"/img/DS-00017.svg\",\"prc\":29499,\"rtg\":3,\"sku\":\"DS-00017\",\"stk\":14,\"ttl\":\"Vantage Portable Monitor 15 Pro 8\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":2,\"weight_g\":2165},\"brd\":\"Lumio\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Lumio Wireless Headphones Max 4 pairs multi-device pairing with recycled packaging and a two-year warranty.\",\"id\":18,\"img\":\"/img/DS-00018.svg\",\"prc\":7899,\"rtg\":4,\"sku\":\"DS-00018\",\"stk\":0,\"ttl\":\"Lumio Wireless Headphones Max 4\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1975},\"brd\":\"Zephyr\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Creator Laptop 15 Neo 5 pairs a machined aluminium chassis with a companion app with firmware updates and multi-device pairing.\",\"id\":19,\"img\":\"/img/DS-00019.svg\",\"prc\":139399,\"rtg\":4,\"sku\":\"DS-00019\",\"stk\":2,\"ttl\":\"Zephyr Creator Laptop 15 Neo 5\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":2,\"weight_g\":1570},\"brd\":\"Auralis\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Auralis GPS Running Watch Pro 3 pairs recycled packaging with low-latency Bluetooth 5.3 and multi-device pairing.\",\"id\":20,\"img\":\"/img/DS-00020.svg\",\"prc\":23799,\"rtg\":3,\"sku\":\"DS-00020\",\"stk\":49,\"ttl\":\"Auralis GPS Running Watch Pro 3\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":2,\"weight_g\":2195},\"brd\":\"Orbitron\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Orbitron Mirrorless Camera X 2 pairs a companion app with firmware updates with all-day battery life and a machined aluminium chassis.\",\"id\":21,\"img\":\"/img/DS-00021.svg\",\"prc\":37199,\"rtg\":4,\"sku\":\"DS-00021\",\"stk\":32,\"ttl\":\"Orbitron Mirrorless Camera X 2\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":2,\"weight_g\":845},\"brd\":\"Pinecrest\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Low-Profile Keyboard Pro 9 pairs USB-C fast charging with a two-year warranty and a machined aluminium chassis.\",\"id\":22,\"img\":\"/img/DS-00022.svg\",\"prc\":11499,\"rtg\":3,\"sku\":\"DS-00022\",\"stk\":22,\"ttl\":\"Pinecrest Low-Profile Keyboard Pro 9\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":2,\"weight_g\":1685},\"brd\":\"Lumio\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Lumio 4K Monitor 27 Lite 4 pairs recycled packaging with all-day battery life and a companion app with firmware updates.\",\"id\":23,\"img\":\"/img/DS-00023.svg\",\"prc\":119899,\"rtg\":4,\"sku\":\"DS-00023\",\"stk\":48,\"ttl\":\"Lumio 4K Monitor 27 Lite 4\",\"upd\":\"2026-11-05T19:06:26+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":2,\"weight_g\":355},\"brd\":\"Auralis\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Auralis Sport Earbuds X 7 pairs all-day battery life with a factory-calibrated display and multi-device pairing.\",\"id\":24,\"img\":\"/img/DS-00024.svg\",\"prc\":15899,\"rtg\":5,\"sku\":\"DS-00024\",\"stk\":57,\"ttl\":\"Auralis Sport Earbuds X 7\",\"upd\":\"2026-11-05T19:06:26+00:00\"}],\"next\":\"eyJhIjogMjQsICJ2IjogMn0\",\"total\":600}\n"
+  },
+  {
+    "request_id": "17340.32",
+    "method": "GET",
+    "url": "http://127.0.0.1:5050/api/v2/catalog?cursor=eyJhIjogMjQsICJ2IjogMn0&limit=24",
+    "resource_type": "Fetch",
+    "request_headers": {
+      "accept": "application/json",
+      "referer": "http://127.0.0.1:5050/",
+      "user-agent": "PriceLensBot/1.0 (+https://github.com/arjun93005/django_app)",
+      "x-ds-s": "f668285e6e4ee0b19443f38412c6bc4f1e2023459d6b2a7708880cb6098eea3d",
+      "x-ds-t": "1793905588854",
+      "sec-ch-ua": "\"Not:A-Brand\";v=\"8\", \"Chromium\";v=\"156\", \"Google Chrome\";v=\"156\"",
+      "sec-ch-ua-mobile": "?0",
+      "sec-ch-ua-platform": "\"Windows\"",
+      "accept-encoding": "gzip, deflate, br, zstd",
+      "accept-language": "en-US,en;q=0.9",
+      "connection": "keep-alive",
+      "cookie": "<redacted>",
+      "host": "127.0.0.1:5050",
+      "sec-fetch-dest": "empty",
+      "sec-fetch-mode": "cors",
+      "sec-fetch-site": "same-origin"
+    },
+    "request_body": null,
+    "status": 200,
+    "response_headers": {
+      "cache-control": "no-store",
+      "connection": "close",
+      "content-length": "9596",
+      "content-type": "application/json",
+      "date": "Thu, 05 Nov 2026 19:06:28 GMT",
+      "server": "Werkzeug/3.1.9 Python/3.12.10"
+    },
+    "mime_type": "application/json",
+    "body": "{\"data\":[{\"att\":{\"color\":\"graphite\",\"warranty_years\":3,\"weight_g\":2330},\"brd\":\"Zephyr\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Creator Laptop 15 Pro 8 pairs all-day battery life with a companion app with firmware updates and recycled packaging.\",\"id\":25,\"img\":\"/img/DS-00025.svg\",\"prc\":249099,\"rtg\":4,\"sku\":\"DS-00025\",\"stk\":38,\"ttl\":\"Zephyr Creator Laptop 15 Pro 8\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":3,\"weight_g\":1205},\"brd\":\"Zephyr\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Zephyr GPS Running Watch Max 9 pairs a companion app with firmware updates with a factory-calibrated display and multi-device pairing.\",\"id\":26,\"img\":\"/img/DS-00026.svg\",\"prc\":11199,\"rtg\":4,\"sku\":\"DS-00026\",\"stk\":36,\"ttl\":\"Zephyr GPS Running Watch Max 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1145},\"brd\":\"Halcyon\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Action Camera Air 5 pairs low-latency Bluetooth 5.3 with recycled packaging and IP54 splash resistance.\",\"id\":27,\"img\":\"/img/DS-00027.svg\",\"prc\":151599,\"rtg\":4,\"sku\":\"DS-00027\",\"stk\":10,\"ttl\":\"Halcyon Action Camera Air 5\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":3,\"weight_g\":780},\"brd\":\"Quanta\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Quanta Wireless Keypad Plus 3 pairs low-latency Bluetooth 5.3 with IP54 splash resistance and a companion app with firmware updates.\",\"id\":28,\"img\":\"/img/DS-00028.svg\",\"prc\":5999,\"rtg\":3,\"sku\":\"DS-00028\",\"stk\":42,\"ttl\":\"Quanta Wireless Keypad Plus 3\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":3,\"weight_g\":360},\"brd\":\"Kestrel\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Kestrel Ultrawide Monitor 34 Pro 2 pairs all-day battery life with a two-year warranty and a factory-calibrated display.\",\"id\":29,\"img\":\"/img/DS-00029.svg\",\"prc\":40499,\"rtg\":4,\"sku\":\"DS-00029\",\"stk\":40,\"ttl\":\"Kestrel Ultrawide Monitor 34 Pro 2\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":3,\"weight_g\":1145},\"brd\":\"Zephyr\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Sport Earbuds Edge 8 pairs recycled packaging with a machined aluminium chassis and a two-year warranty.\",\"id\":30,\"img\":\"/img/DS-00030.svg\",\"prc\":15899,\"rtg\":4,\"sku\":\"DS-00030\",\"stk\":0,\"ttl\":\"Zephyr Sport Earbuds Edge 8\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":2,\"weight_g\":1340},\"brd\":\"Zephyr\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Ultrabook 14 Lite 3 pairs low-latency Bluetooth 5.3 with multi-device pairing and a factory-calibrated display.\",\"id\":31,\"img\":\"/img/DS-00031.svg\",\"prc\":168399,\"rtg\":4,\"sku\":\"DS-00031\",\"stk\":18,\"ttl\":\"Zephyr Ultrabook 14 Lite 3\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":2,\"weight_g\":2230},\"brd\":\"Orbitron\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Orbitron Hybrid Smartwatch Max 6 pairs multi-device pairing with low-latency Bluetooth 5.3 and all-day battery life.\",\"id\":32,\"img\":\"/img/DS-00032.svg\",\"prc\":38899,\"rtg\":3,\"sku\":\"DS-00032\",\"stk\":0,\"ttl\":\"Orbitron Hybrid Smartwatch Max 6\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":3,\"weight_g\":2000},\"brd\":\"Pinecrest\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Instant Camera Air 8 pairs multi-device pairing with all-day battery life and IP54 splash resistance.\",\"id\":33,\"img\":\"/img/DS-00033.svg\",\"prc\":42599,\"rtg\":4,\"sku\":\"DS-00033\",\"stk\":33,\"ttl\":\"Pinecrest Instant Camera Air 8\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":1975},\"brd\":\"Vantage\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Vantage Low-Profile Keyboard S 9 pairs a companion app with firmware updates with recycled packaging and IP54 splash resistance.\",\"id\":34,\"img\":\"/img/DS-00034.svg\",\"prc\":21999,\"rtg\":4,\"sku\":\"DS-00034\",\"stk\":12,\"ttl\":\"Vantage Low-Profile Keyboard S 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":1,\"weight_g\":1320},\"brd\":\"Halcyon\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Ultrawide Monitor 34 Max 6 pairs a factory-calibrated display with USB-C fast charging and low-latency Bluetooth 5.3.\",\"id\":35,\"img\":\"/img/DS-00035.svg\",\"prc\":147499,\"rtg\":4,\"sku\":\"DS-00035\",\"stk\":47,\"ttl\":\"Halcyon Ultrawide Monitor 34 Max 6\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":1815},\"brd\":\"Northwind\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Northwind Noise-Cancelling Earbuds Air 7 pairs recycled packaging with USB-C fast charging and a machined aluminium chassis.\",\"id\":36,\"img\":\"/img/DS-00036.svg\",\"prc\":38399,\"rtg\":5,\"sku\":\"DS-00036\",\"stk\":35,\"ttl\":\"Northwind Noise-Cancelling Earbuds Air 7\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1240},\"brd\":\"Halcyon\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Ultrabook 14 Plus 3 pairs recycled packaging with a companion app with firmware updates and IP54 splash resistance.\",\"id\":37,\"img\":\"/img/DS-00037.svg\",\"prc\":82399,\"rtg\":3,\"sku\":\"DS-00037\",\"stk\":58,\"ttl\":\"Halcyon Ultrabook 14 Plus 3\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":1,\"weight_g\":1795},\"brd\":\"Lumio\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Lumio Fitness Watch Pro 2 pairs a companion app with firmware updates with all-day battery life and multi-device pairing.\",\"id\":38,\"img\":\"/img/DS-00038.svg\",\"prc\":69799,\"rtg\":4,\"sku\":\"DS-00038\",\"stk\":50,\"ttl\":\"Lumio Fitness Watch Pro 2\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":2065},\"brd\":\"Vantage\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Vantage Instant Camera X 6 pairs a companion app with firmware updates with recycled packaging and a factory-calibrated display.\",\"id\":39,\"img\":\"/img/DS-00039.svg\",\"prc\":90499,\"rtg\":5,\"sku\":\"DS-00039\",\"stk\":0,\"ttl\":\"Vantage Instant Camera X 6\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":2,\"weight_g\":975},\"brd\":\"Halcyon\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Halcyon Wireless Keypad Ultra 5 pairs IP54 splash resistance with a machined aluminium chassis and a two-year warranty.\",\"id\":40,\"img\":\"/img/DS-00040.svg\",\"prc\":2699,\"rtg\":5,\"sku\":\"DS-00040\",\"stk\":17,\"ttl\":\"Halcyon Wireless Keypad Ultra 5\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"white\",\"warranty_years\":1,\"weight_g\":2280},\"brd\":\"Vantage\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Vantage Portable Monitor 15 Plus 9 pairs USB-C fast charging with a machined aluminium chassis and all-day battery life.\",\"id\":41,\"img\":\"/img/DS-00041.svg\",\"prc\":137199,\"rtg\":4,\"sku\":\"DS-00041\",\"stk\":44,\"ttl\":\"Vantage Portable Monitor 15 Plus 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"silver\",\"warranty_years\":3,\"weight_g\":1395},\"brd\":\"Vantage\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Vantage Noise-Cancelling Earbuds S 9 pairs recycled packaging with a machined aluminium chassis and a factory-calibrated display.\",\"id\":42,\"img\":\"/img/DS-00042.svg\",\"prc\":7699,\"rtg\":3,\"sku\":\"DS-00042\",\"stk\":0,\"ttl\":\"Vantage Noise-Cancelling Earbuds S 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":220},\"brd\":\"Pinecrest\",\"cat\":\"Laptops\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest Convertible 2-in-1 Neo 4 pairs multi-device pairing with all-day battery life and a factory-calibrated display.\",\"id\":43,\"img\":\"/img/DS-00043.svg\",\"prc\":266599,\"rtg\":5,\"sku\":\"DS-00043\",\"stk\":5,\"ttl\":\"Pinecrest Convertible 2-in-1 Neo 4\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"midnight blue\",\"warranty_years\":3,\"weight_g\":2420},\"brd\":\"Pinecrest\",\"cat\":\"Smartwatches\",\"cur\":\"USD\",\"dsc\":\"The Pinecrest GPS Running Watch Neo 6 pairs low-latency Bluetooth 5.3 with USB-C fast charging and IP54 splash resistance.\",\"id\":44,\"img\":\"/img/DS-00044.svg\",\"prc\":62399,\"rtg\":4,\"sku\":\"DS-00044\",\"stk\":47,\"ttl\":\"Pinecrest GPS Running Watch Neo 6\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":1,\"weight_g\":1295},\"brd\":\"Zephyr\",\"cat\":\"Cameras\",\"cur\":\"USD\",\"dsc\":\"The Zephyr Vlogging Kit Ultra 2 pairs USB-C fast charging with a factory-calibrated display and a machined aluminium chassis.\",\"id\":45,\"img\":\"/img/DS-00045.svg\",\"prc\":186399,\"rtg\":3,\"sku\":\"DS-00045\",\"stk\":0,\"ttl\":\"Zephyr Vlogging Kit Ultra 2\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"sand\",\"warranty_years\":3,\"weight_g\":210},\"brd\":\"Orbitron\",\"cat\":\"Keyboards\",\"cur\":\"USD\",\"dsc\":\"The Orbitron Ergonomic Split Keyboard Air 9 pairs a two-year warranty with a factory-calibrated display and a machined aluminium chassis.\",\"id\":46,\"img\":\"/img/DS-00046.svg\",\"prc\":13899,\"rtg\":3,\"sku\":\"DS-00046\",\"stk\":0,\"ttl\":\"Orbitron Ergonomic Split Keyboard Air 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"black\",\"warranty_years\":3,\"weight_g\":750},\"brd\":\"Northwind\",\"cat\":\"Monitors\",\"cur\":\"USD\",\"dsc\":\"The Northwind Ultrawide Monitor 34 Lite 5 pairs multi-device pairing with recycled packaging and a companion app with firmware updates.\",\"id\":47,\"img\":\"/img/DS-00047.svg\",\"prc\":28799,\"rtg\":3,\"sku\":\"DS-00047\",\"stk\":60,\"ttl\":\"Northwind Ultrawide Monitor 34 Lite 5\",\"upd\":\"2026-11-05T19:06:28+00:00\"},{\"att\":{\"color\":\"graphite\",\"warranty_years\":2,\"weight_g\":715},\"brd\":\"Lumio\",\"cat\":\"Headphones\",\"cur\":\"USD\",\"dsc\":\"The Lumio Wireless Headphones X 9 pairs multi-device pairing with all-day battery life and a two-year warranty.\",\"id\":48,\"img\":\"/img/DS-00048.svg\",\"prc\":7999,\"rtg\":4,\"sku\":\"DS-00048\",\"stk\":40,\"ttl\":\"Lumio Wireless Headphones X 9\",\"upd\":\"2026-11-05T19:06:28+00:00\"}],\"next\":\"eyJhIjogNDgsICJ2IjogMn0\",\"total\":600}\n"
+  }
+]
