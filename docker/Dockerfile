@@ -3,8 +3,10 @@
 # Multi-stage build:
 #   builder  - compiles wheels (uWSGI is a C program built from source by pip)
 #   runtime  - slim image with only the wheels + app; runs uWSGI / Celery
+#   nginx    - Nginx with the collected static files baked in
 #
 #   docker build -f docker/Dockerfile --target runtime -t pricelens .
+#   docker build -f docker/Dockerfile --target nginx   -t pricelens-nginx .
 
 ARG PYTHON_VERSION=3.12
 
@@ -53,3 +55,10 @@ HEALTHCHECK --interval=15s --timeout=3s --start-period=20s --retries=3 \
     CMD ["python", "/app/docker/healthcheck.py"]
 ENTRYPOINT ["/app/docker/entrypoint.sh"]
 CMD ["uwsgi", "--ini", "/app/deploy/uwsgi/uwsgi.ini"]
+
+# ---------------------------------------------------------------------------
+FROM nginx:1.27-alpine AS nginx
+RUN rm /etc/nginx/conf.d/default.conf
+COPY deploy/nginx/nginx.conf /etc/nginx/nginx.conf
+COPY deploy/nginx/conf.d/ /etc/nginx/conf.d/
+COPY --from=runtime /app/var/static /srv/static
