@@ -1,0 +1,4 @@
+-r base.txt
+
+# Application server. Compiled from source in the Docker builder stage.
+uWSGI==2.0.31
