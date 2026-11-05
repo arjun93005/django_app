@@ -7,4 +7,5 @@ psycopg[binary,pool]==3.3.8
 # crawling
 httpx==0.28.1
 parsel==1.12.1
+selenium==4.52.0
 pydantic==2.14.3
