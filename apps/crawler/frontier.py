@@ -27,7 +27,8 @@ WITH next AS (
     FROM crawler_frontierurl
     WHERE source_id = %(source_id)s
       AND status = 'pending'
-      AND next_attempt_at <= now()
+      -- clock_timestamp(), not now(): now() is frozen at transaction start
+      AND next_attempt_at <= clock_timestamp()
     ORDER BY priority DESC, id
     LIMIT %(limit)s
     FOR UPDATE SKIP LOCKED
