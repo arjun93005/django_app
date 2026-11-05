@@ -25,7 +25,8 @@ API serves it through **Nginx → uWSGI**, built to scale horizontally.
 | **Reverse engineering + robust crawlers** | CDP network capture to discover a private API ([apps/crawler/discovery.py](apps/crawler/discovery.py)); Python port of the site's obfuscated HMAC request signing, verified byte-for-byte against captured browser traffic; Selenium only where JavaScript is unavoidable (JS-challenge session bootstrap, DOM fallback) and plain HTTP for bulk data ([apps/crawler/sources/demo_shop.py](apps/crawler/sources/demo_shop.py)). Retries with jittered backoff + `Retry-After`, adaptive per-host rate limiting, robots.txt, conditional GETs, checkpoint/resume, self-healing sessions and clock skew ([apps/crawler/http.py](apps/crawler/http.py)). |
 | **PostgreSQL / SQL** | URL frontier as a work queue with `FOR UPDATE SKIP LOCKED` ([apps/crawler/frontier.py](apps/crawler/frontier.py)); batched upserts via `unnest` arrays + `ON CONFLICT` + `xmax` insert detection, change-only history with a `LATERAL` probe ([apps/crawler/pipeline.py](apps/crawler/pipeline.py)); PL/pgSQL trigger for `tsvector` search, pg_trgm typo fallback; partial, covering (`INCLUDE`), GIN, BRIN indexes; a forward-filling materialized view refreshed `CONCURRENTLY`; DB-enforced invariants (partial unique index, CHECKs); `COPY` exports; advisory locks; PgBouncer transaction pooling. |
 
-All numbers below were measured, not estimated - see [docs/performance.md](docs/performance.md).
+A detailed write-up is in **[PROJECT_SUMMARY.md](PROJECT_SUMMARY.md)**. All numbers below were measured,
+not estimated - see [docs/performance.md](docs/performance.md).
 
 | Measurement | Result |
 |---|---|
@@ -98,6 +99,8 @@ RUN_SELENIUM_TESTS=1 pytest -m selenium   # 3 more that drive headless Chrome
 
 ## Documentation
 
+* [PROJECT_SUMMARY.md](PROJECT_SUMMARY.md) - the detailed project summary: goals, stack, highlights per
+  skill area, measured results, engineering challenges, design trade-offs
 * [docs/architecture.md](docs/architecture.md) - components, data model, design decisions
 * [docs/reverse-engineering.md](docs/reverse-engineering.md) - how the private API was taken apart
 * [docs/deployment.md](docs/deployment.md) - uWSGI / Nginx / PgBouncer / Postgres configuration explained
