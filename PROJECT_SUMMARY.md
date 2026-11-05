@@ -222,6 +222,8 @@ commits in the history.
 | Selenium fallback hung on the last page | CSS `display: block` overrode the `hidden` attribute | fixed CSS; treat "no new cards" as end of list |
 | 71 % of load-test requests got 429 | DRF's `UserRateThrottle` also throttles *anonymous* users by IP | env-configurable throttle rates |
 | Workers restarted every ~35 s under load | `max-requests = 5000` + lazy-apps re-import | `max-requests = 50000` |
+| Every app container failed to start in CI | repo created on Windows, so `entrypoint.sh` was committed without the exec bit (100644) | `git update-index --chmod=+x` + `chmod` in the Dockerfile |
+| Celery workers crashed in the production image only | kombu imports `packaging` but declares it only in its `redis` extra; tests passed because pytest installs it | depend on `celery[redis]`; caught by the CI full-stack job |
 | Crawler ~6× slower on Windows | `localhost` resolved to IPv6 first and fell back per connection | use `127.0.0.1` for the local target |
 
 ---
