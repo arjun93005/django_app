@@ -14,7 +14,7 @@ uwsgi_no_cache         $skip_cache;
 uwsgi_cache_lock          on;
 uwsgi_cache_lock_timeout  2s;
 # ...or are served the stale copy while a background request refreshes it.
-uwsgi_cache_use_stale          updating error timeout http_500 http_502 http_503;
+uwsgi_cache_use_stale          updating error timeout http_500 http_503;
 uwsgi_cache_background_update  on;
 # add_header in a location replaces the server-level ones, so repeat them.
 add_header X-Cache-Status $upstream_cache_status always;
