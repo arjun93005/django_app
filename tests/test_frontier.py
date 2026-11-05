@@ -19,6 +19,7 @@ def test_enqueue_deduplicates_by_canonical_url(source):
         [
             Link("HTTPS://Shop.test:443/a?b=2&a=1#reviews"),
             Link("https://shop.test/a?a=1&b=2"),
+            Link("https://shop.test/a/../a?a=1&b=2"),
         ],
     )
     frontier.enqueue(source, [Link("https://shop.test/a?a=1&b=2")])  # second batch: ON CONFLICT DO NOTHING
