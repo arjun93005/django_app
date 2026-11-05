@@ -163,7 +163,11 @@ REST_FRAMEWORK = {
         "rest_framework.throttling.UserRateThrottle",
         "rest_framework.throttling.ScopedRateThrottle",
     ],
-    "DEFAULT_THROTTLE_RATES": {"anon": "300/min", "user": "1200/min", "exports": "20/hour"},
+    "DEFAULT_THROTTLE_RATES": {
+        "anon": env("THROTTLE_ANON", default="300/min"),
+        "user": env("THROTTLE_USER", default="1200/min"),
+        "exports": env("THROTTLE_EXPORTS", default="20/hour"),
+    },
     # Default for small admin-ish lists; the product list uses keyset
     # (cursor) pagination - see apps/catalog/api/views.py.
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",

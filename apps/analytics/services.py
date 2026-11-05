@@ -23,35 +23,29 @@ def refresh_daily_category_stats() -> bool:
 
 
 PRICE_DROPS_SQL = """
-WITH recently_changed AS (
-    -- semi-join first, so the window function only runs over products that
-    -- actually changed inside the window (BRIN index on observed_at)
-    SELECT DISTINCT product_id
-    FROM catalog_pricepoint
-    WHERE observed_at >= %(since)s
-),
-changes AS (
-    SELECT pp.product_id,
-           pp.observed_at,
-           pp.price,
-           lag(pp.price) OVER w AS previous_price
-    FROM catalog_pricepoint pp
-    JOIN recently_changed rc USING (product_id)
-    WINDOW w AS (PARTITION BY pp.product_id ORDER BY pp.observed_at)
-)
 SELECT p.id, p.title, p.currency, cat.slug AS category, s.slug AS source,
-       c.previous_price, c.price, c.observed_at,
-       round((c.price - c.previous_price) / c.previous_price * 100, 2) AS change_pct
-FROM changes c
-JOIN catalog_product p   ON p.id = c.product_id
+       prev.price AS previous_price, cur.price, cur.observed_at,
+       round((cur.price - prev.price) / prev.price * 100, 2) AS change_pct
+FROM catalog_pricepoint cur                       -- recent rows only: BRIN on observed_at
+CROSS JOIN LATERAL (
+    -- The observation right before this one, even if it is older than the
+    -- window: one index-only probe on (product_id, observed_at DESC) INCLUDE (price).
+    SELECT pp.price
+    FROM catalog_pricepoint pp
+    WHERE pp.product_id = cur.product_id
+      AND pp.observed_at < cur.observed_at
+    ORDER BY pp.observed_at DESC
+    LIMIT 1
+) AS prev
+JOIN catalog_product p   ON p.id = cur.product_id
 JOIN crawler_source s    ON s.id = p.source_id
 LEFT JOIN catalog_category cat ON cat.id = p.category_id
-WHERE c.observed_at >= %(since)s
-  AND c.previous_price > 0
-  AND c.price < c.previous_price
-  AND (c.previous_price - c.price) / c.previous_price * 100 >= %(min_drop_pct)s
+WHERE cur.observed_at >= %(since)s
+  AND prev.price > 0
+  AND cur.price < prev.price
+  AND (prev.price - cur.price) / prev.price * 100 >= %(min_drop_pct)s
   AND (%(category)s::text IS NULL OR cat.slug = %(category)s::text)
-ORDER BY change_pct ASC, c.observed_at DESC
+ORDER BY change_pct ASC, cur.observed_at DESC
 LIMIT %(limit)s
 """
 

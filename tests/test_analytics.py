@@ -40,7 +40,7 @@ def test_category_trend_endpoint_reads_the_view(api_client, source, category):
 
 
 @pytest.mark.django_db
-def test_price_drops_uses_lag_over_full_history(api_client, source, category):
+def test_price_drops_find_previous_price_outside_the_window(api_client, source, category):
     old = make_product(source, external_id="OLD", price="200.00", category=category)
     PricePoint.objects.filter(product=old).update(observed_at=timezone.now() - timedelta(days=60))
     add_price(old, "150.00", days_ago=1)  # previous point is *outside* the 7-day window
