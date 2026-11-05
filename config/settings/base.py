@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "apps.core",
     "apps.crawler",
     "apps.catalog",
+    "apps.analytics",
 ]
 
 MIDDLEWARE = [
