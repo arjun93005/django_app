@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DemoShop - Electronics</title>
+  <style>
+    :root { font-family: system-ui, sans-serif; color: #1d2433; background: #f5f6fa; }
+    header { padding: 1.25rem 2rem; background: #1d2433; color: #fff; }
+    main { padding: 1.5rem 2rem; }
+    #grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .card { background: #fff; border-radius: 10px; padding: .9rem; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+    .card__img { width: 100%; aspect-ratio: 16/10; object-fit: cover; border-radius: 6px; background: #e3e6ee; }
+    .card__title { font-size: 1rem; margin: .6rem 0 .2rem; }
+    .card__brand, .card__cat, .card__stock { margin: .15rem 0; font-size: .85rem; color: #5b6478; }
+    .card__price { font-weight: 700; font-size: 1.1rem; margin: .4rem 0; }
+    #load-more { margin: 1.5rem auto; display: block; padding: .7rem 1.6rem; border: 0; border-radius: 8px;
+                 background: #3157d5; color: #fff; font-size: 1rem; cursor: pointer; }
+    #load-more[disabled] { opacity: .5; }
+  </style>
+</head>
+<body>
+  <header><strong>DemoShop</strong> &middot; electronics deals</header>
+  <main>
+    <p id="status">Loading&hellip;</p>
+    <section id="grid" aria-live="polite"></section>
+    <button id="load-more" type="button">Load more</button>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

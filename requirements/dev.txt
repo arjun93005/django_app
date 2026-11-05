@@ -3,3 +3,6 @@
 pytest==9.2.0
 pytest-django==4.14.0
 ruff==0.17.3
+
+# demo_target (the mock crawl target) is imported by the integration tests
+Flask==3.1.3
