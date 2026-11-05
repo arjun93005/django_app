@@ -4,7 +4,9 @@ django-filter==26.2
 django-environ==0.14.0
 psycopg[binary,pool]==3.3.8
 redis==8.1.0
-celery==5.7.0
+# [redis] extra: kombu needs `packaging` for its Redis transport and only declares
+# it there (tests passed without it only because pytest pulls it in).
+celery[redis]==5.7.0
 
 # crawling
 httpx==0.28.1
