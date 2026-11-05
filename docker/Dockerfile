@@ -47,7 +47,9 @@ COPY --chown=app:app . .
 # so the image is immutable and Nginx can cache them forever.
 RUN DJANGO_SECRET_KEY=build-only-not-secret python manage.py collectstatic --noinput \
  && mkdir -p /srv/exports /app/var && touch /app/var/reload \
- && chown -R app:app /srv/exports /app/var
+ && chown -R app:app /srv/exports /app/var \
+ && chmod 0755 /app/docker/entrypoint.sh
+# (the exec bit doesn't survive every checkout: zip downloads, core.filemode=false)
 
 USER app
 EXPOSE 8000
