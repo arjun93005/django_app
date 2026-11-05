@@ -32,7 +32,7 @@ from urllib.parse import quote, urljoin
 
 from django.conf import settings
 from pydantic import ValidationError
-from selenium.common.exceptions import StaleElementReferenceException
+from selenium.common.exceptions import StaleElementReferenceException, TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
@@ -250,11 +250,16 @@ def scrape_rendered_catalog(base_url: str, *, timeout: float = 20) -> Iterator[l
                 return
             driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", button[0])
             wait.until(EC.element_to_be_clickable((By.ID, "load-more"))).click()
-            wait.until(
-                lambda d, seen=seen: (
-                    len(d.find_elements(*card)) > seen or not d.find_element(By.ID, "load-more").is_displayed()
+            try:
+                wait.until(
+                    lambda d, seen=seen: (
+                        len(d.find_elements(*card)) > seen or not d.find_element(By.ID, "load-more").is_displayed()
+                    )
                 )
-            )
+            except TimeoutException:
+                # Many sites leave a dead "load more" button at the end of the list.
+                logger.info("no new cards after clicking 'load more'; assuming end of list")
+                return
 
 
 @register
