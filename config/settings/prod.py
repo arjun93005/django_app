@@ -24,3 +24,6 @@ STORAGES = {
     "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
     "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage"},
 }
+
+# Nginx streams export files; Django only authorises the download.
+EXPORTS_USE_X_ACCEL = env.bool("EXPORTS_USE_X_ACCEL", default=True)

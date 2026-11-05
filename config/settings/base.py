@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "apps.crawler",
     "apps.catalog",
     "apps.analytics",
+    "apps.exports",
 ]
 
 MIDDLEWARE = [
@@ -230,6 +231,13 @@ CRAWLER = {
     "SELENIUM_HEADLESS": env.bool("SELENIUM_HEADLESS", default=True),
     "DEMO_SHOP_URL": env("DEMO_SHOP_URL", default="http://127.0.0.1:5050"),
 }
+
+# --------------------------------------------------------------------------
+# CSV exports (generated with COPY, served by Nginx via X-Accel-Redirect)
+# --------------------------------------------------------------------------
+EXPORTS_ROOT = env.path("EXPORTS_ROOT", default=BASE_DIR / "var" / "exports")
+EXPORTS_USE_X_ACCEL = env.bool("EXPORTS_USE_X_ACCEL", default=False)
+EXPORTS_X_ACCEL_PREFIX = "/protected-exports/"
 
 # --------------------------------------------------------------------------
 # Observability

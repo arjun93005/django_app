@@ -1,3 +1,6 @@
+import tempfile
+from pathlib import Path
+
 from .base import *  # noqa: F403
 from .base import REST_FRAMEWORK
 
@@ -10,3 +13,6 @@ CELERY_BROKER_URL = "memory://"
 CELERY_RESULT_BACKEND = "cache+memory://"
 
 REST_FRAMEWORK = {**REST_FRAMEWORK, "DEFAULT_THROTTLE_CLASSES": []}
+
+EXPORTS_ROOT = Path(tempfile.gettempdir()) / "pricelens-test-exports"
+EXPORTS_USE_X_ACCEL = False
