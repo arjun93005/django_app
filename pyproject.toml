@@ -1,0 +1,31 @@
+[project]
+name = "pricelens"
+version = "1.0.0"
+description = "Product & price intelligence platform: Django + PostgreSQL + Selenium/HTTP crawlers behind uWSGI and Nginx"
+requires-python = ">=3.12"
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+addopts = "-ra --strict-markers"
+testpaths = ["tests"]
+markers = ["selenium: drives a real headless Chrome (opt-in via RUN_SELENIUM_TESTS=1)"]
+filterwarnings = ["ignore::DeprecationWarning:celery.*"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py312"
+extend-exclude = ["*/migrations/*"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP", "DJ", "S", "BLE", "SIM", "RUF"]
+ignore = [
+    "S101",   # assert is fine in tests and for internal invariants
+    "S311",   # random is used for jitter / fake data, not crypto
+    "S608",   # SQL is built from whitelisted fragments only (see apps/exports/services.py)
+    "RUF012", # mutable class attrs on Django/DRF classes are idiomatic
+    "DJ001",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/*" = ["S105", "S106"]
+"demo_target/*" = ["S104"]

@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Environments
+.venv/
+venv/
+.env
+
+# Runtime artefacts (static build, exports, celery beat schedule, local db)
+var/
+celerybeat-schedule*
+*.sqlite3
+
+# Selenium / crawler debugging output
+*.log
+screenshots/
+
+# Editors / OS
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
