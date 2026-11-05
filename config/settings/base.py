@@ -5,6 +5,7 @@ environment (12-factor), so one Docker image can run as the uWSGI web tier,
 a Celery worker or Celery beat just by changing env vars / the command.
 """
 
+from datetime import timedelta
 from pathlib import Path
 
 import environ
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     "django_filters",
     "apps.core",
+    "apps.crawler",
 ]
 
 MIDDLEWARE = [
@@ -162,6 +164,28 @@ REST_FRAMEWORK = {
     # (cursor) pagination - see apps/catalog/api/views.py.
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 50,
+}
+
+# --------------------------------------------------------------------------
+# Crawler
+# --------------------------------------------------------------------------
+CRAWLER = {
+    # Identify honestly; site owners can contact / block us.
+    "USER_AGENT": env(
+        "CRAWLER_USER_AGENT",
+        default="PriceLensBot/1.0 (+https://github.com/arjun93005/django_app)",
+    ),
+    "RESPECT_ROBOTS_TXT": env.bool("CRAWLER_RESPECT_ROBOTS", default=True),
+    "HTTP_TIMEOUT": env.float("CRAWLER_HTTP_TIMEOUT", default=20.0),
+    "MAX_RETRIES": env.int("CRAWLER_MAX_RETRIES", default=4),
+    "FLUSH_EVERY": env.int("CRAWLER_FLUSH_EVERY", default=200),
+    "CLAIM_BATCH": env.int("CRAWLER_CLAIM_BATCH", default=10),
+    # A claimed frontier URL whose worker died becomes visible again after this.
+    "VISIBILITY_TIMEOUT": timedelta(seconds=env.int("CRAWLER_VISIBILITY_TIMEOUT", default=300)),
+    "MAX_RUN_DURATION": timedelta(hours=env.int("CRAWLER_MAX_RUN_HOURS", default=3)),
+    "SELENIUM_REMOTE_URL": env("SELENIUM_REMOTE_URL", default=""),
+    "SELENIUM_HEADLESS": env.bool("SELENIUM_HEADLESS", default=True),
+    "DEMO_SHOP_URL": env("DEMO_SHOP_URL", default="http://127.0.0.1:5050"),
 }
 
 # --------------------------------------------------------------------------
