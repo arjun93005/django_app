@@ -1,0 +1,208 @@
+# Full PriceLens stack.
+#
+#   docker compose up --build -d
+#   open http://localhost:8080/api/v1/products/      (through Nginx -> uWSGI)
+#   open http://localhost:7900  (password: secret)   watch Selenium's Chrome live (noVNC)
+#
+# Scale-out examples:
+#   docker compose up -d --scale web=3        Nginx round-robins over 3 uWSGI replicas
+#   docker compose up -d --scale crawler=4    frontier workers share work via SKIP LOCKED
+
+x-app: &app
+  build:
+    context: .
+    dockerfile: docker/Dockerfile
+    target: runtime
+  image: pricelens:latest
+  restart: unless-stopped
+  environment: &app-env
+    DJANGO_SETTINGS_MODULE: config.settings.prod
+    DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-change-me-please-this-is-only-for-local-compose}
+    DJANGO_ALLOWED_HOSTS: localhost,127.0.0.1,nginx,web
+    DJANGO_SECURE_COOKIES: "false"      # plain HTTP locally; terminate TLS in front for real deployments
+    # Application traffic goes through PgBouncer (transaction pooling).
+    DATABASE_URL: postgres://pricelens:pricelens@pgbouncer:6432/pricelens
+    USE_PGBOUNCER: "true"
+    REDIS_URL: redis://redis:6379/0
+    CELERY_BROKER_URL: redis://redis:6379/1
+    CELERY_RESULT_BACKEND: redis://redis:6379/2
+    SELENIUM_REMOTE_URL: http://selenium:4444
+    DEMO_SHOP_URL: http://demo-target:5050
+    EXPORTS_ROOT: /srv/exports
+  volumes:
+    - exports:/srv/exports
+  depends_on: &app-depends
+    pgbouncer:
+      condition: service_started
+    redis:
+      condition: service_healthy
+    migrate:
+      condition: service_completed_successfully
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pricelens
+      POSTGRES_USER: pricelens
+      POSTGRES_PASSWORD: pricelens
+    # Sized for a ~2GB container; see docs/deployment.md for the reasoning.
+    command: >
+      postgres
+        -c shared_preload_libraries=pg_stat_statements
+        -c pg_stat_statements.track=all
+        -c max_connections=100
+        -c shared_buffers=512MB
+        -c effective_cache_size=1536MB
+        -c work_mem=16MB
+        -c maintenance_work_mem=128MB
+        -c random_page_cost=1.1
+        -c effective_io_concurrency=200
+        -c wal_compression=on
+        -c checkpoint_completion_target=0.9
+        -c log_min_duration_statement=250
+        -c log_lock_waits=on
+        -c track_io_timing=on
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./deploy/postgres/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pricelens -d pricelens"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  pgbouncer:
+    image: edoburu/pgbouncer:latest
+    restart: unless-stopped
+    environment:
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USER: pricelens
+      DB_PASSWORD: pricelens
+      DB_NAME: pricelens
+      AUTH_TYPE: scram-sha-256
+      # Transaction pooling: a server connection is held only for the duration
+      # of a transaction, so ~1000 client connections (uWSGI threads x replicas,
+      # Celery workers) share 20 real Postgres backends.
+      POOL_MODE: transaction
+      MAX_CLIENT_CONN: "1000"
+      DEFAULT_POOL_SIZE: "20"
+      RESERVE_POOL_SIZE: "5"
+      LISTEN_PORT: "6432"
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  redis:
+    image: redis:7-alpine
+    restart: unless-stopped
+    # volatile-lru: under memory pressure evict only keys with a TTL (cache
+    # entries) - never Celery's queues, which share this instance.
+    command: redis-server --maxmemory 256mb --maxmemory-policy volatile-lru --save ""
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+  # One-shot: migrations run once, directly against Postgres (DDL shouldn't go
+  # through a transaction pooler), before any web/worker replica starts.
+  migrate:
+    <<: *app
+    restart: "no"
+    command: ["python", "manage.py", "migrate", "--noinput"]
+    environment:
+      <<: *app-env
+      DATABASE_URL: postgres://pricelens:pricelens@postgres:5432/pricelens
+      USE_PGBOUNCER: "false"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    healthcheck:
+      disable: true
+
+  web:
+    <<: *app
+    command: ["uwsgi", "--ini", "/app/deploy/uwsgi/uwsgi.ini"]
+    environment:
+      <<: *app-env
+      WEB_PROCESSES: "8"
+      WEB_THREADS: "2"
+      WEB_CHEAPER: "2"
+    sysctls:
+      net.core.somaxconn: 1024   # matches uWSGI `listen`
+    expose:
+      - "8000"
+
+  nginx:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: nginx
+    image: pricelens-nginx:latest
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - exports:/srv/exports:ro
+    tmpfs:
+      - /var/cache/nginx:size=300m
+    depends_on:
+      web:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://127.0.0.1/healthz"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+  # Crawl queue: long-running, I/O-bound tasks. Separate service so crawls can
+  # never starve exports/analytics and the two scale independently.
+  crawler:
+    <<: *app
+    command: ["celery", "-A", "config", "worker", "-Q", "crawl", "-c", "4", "-n", "crawler@%h",
+              "--max-tasks-per-child", "50", "-l", "info"]
+    depends_on:
+      <<: *app-depends
+      selenium:
+        condition: service_started
+    healthcheck:
+      disable: true
+
+  worker:
+    <<: *app
+    command: ["celery", "-A", "config", "worker", "-Q", "default", "-c", "2", "-n", "default@%h", "-l", "info"]
+    healthcheck:
+      disable: true
+
+  beat:
+    <<: *app
+    command: ["celery", "-A", "config", "beat", "-l", "info", "--schedule", "/tmp/celerybeat-schedule"]
+    healthcheck:
+      disable: true
+
+  selenium:
+    image: selenium/standalone-chrome:latest
+    restart: unless-stopped
+    shm_size: 2gb                # Chrome crashes with Docker's default 64MB /dev/shm
+    environment:
+      SE_NODE_MAX_SESSIONS: "2"
+      SE_NODE_OVERRIDE_MAX_SESSIONS: "true"
+      SE_NODE_SESSION_TIMEOUT: "120"   # reap sessions of crashed clients
+    ports:
+      - "7900:7900"               # noVNC: watch the browser
+
+  demo-target:
+    build: ./demo_target
+    restart: unless-stopped
+    environment:
+      DEMO_PRICE_PERIOD_SECONDS: "600"   # prices move every 10 minutes
+      DEMO_CHAOS_RATE: "0.03"            # 3% random 503s to exercise retries
+    ports:
+      - "5050:5050"
+
+volumes:
+  pgdata:
+  exports:
