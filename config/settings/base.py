@@ -9,6 +9,7 @@ from datetime import timedelta
 from pathlib import Path
 
 import environ
+from celery.schedules import crontab
 
 BASE_DIR = Path(__file__).resolve().parents[2]
 
@@ -166,6 +167,46 @@ REST_FRAMEWORK = {
     # (cursor) pagination - see apps/catalog/api/views.py.
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 50,
+}
+
+# --------------------------------------------------------------------------
+# Celery
+# --------------------------------------------------------------------------
+CELERY_BROKER_URL = env("CELERY_BROKER_URL", default=REDIS_URL or "redis://localhost:6379/1")
+CELERY_RESULT_BACKEND = env("CELERY_RESULT_BACKEND", default=CELERY_BROKER_URL)
+CELERY_TASK_ALWAYS_EAGER = env.bool("CELERY_TASK_ALWAYS_EAGER", default=False)
+CELERY_TASK_SERIALIZER = "json"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_TIMEZONE = TIME_ZONE
+# Crawl tasks are long and I/O bound: acknowledge only after completion so a
+# killed worker's task is redelivered, and don't let one worker hoard tasks.
+CELERY_TASK_ACKS_LATE = True
+CELERY_TASK_REJECT_ON_WORKER_LOST = True
+CELERY_WORKER_PREFETCH_MULTIPLIER = 1
+CELERY_TASK_SOFT_TIME_LIMIT = 60 * 50
+CELERY_TASK_TIME_LIMIT = 60 * 55
+# With acks_late the Redis visibility timeout must exceed the longest task,
+# otherwise the broker redelivers a still-running task to another worker.
+CELERY_BROKER_TRANSPORT_OPTIONS = {"visibility_timeout": 60 * 60 * 2}
+CELERY_TASK_ROUTES = {
+    "apps.crawler.tasks.*": {"queue": "crawl"},
+    "apps.exports.tasks.*": {"queue": "default"},
+    "apps.analytics.tasks.*": {"queue": "default"},
+}
+CELERY_TASK_DEFAULT_QUEUE = "default"
+CELERY_BEAT_SCHEDULE = {
+    "dispatch-due-crawls": {
+        "task": "apps.crawler.tasks.dispatch_due_crawls",
+        "schedule": timedelta(minutes=1),
+    },
+    "crawler-housekeeping": {
+        "task": "apps.crawler.tasks.housekeeping",
+        "schedule": timedelta(minutes=5),
+    },
+    "refresh-daily-category-stats": {
+        "task": "apps.analytics.tasks.refresh_daily_category_stats",
+        "schedule": crontab(minute=15),
+    },
 }
 
 # --------------------------------------------------------------------------
